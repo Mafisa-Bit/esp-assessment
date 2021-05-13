@@ -20,89 +20,102 @@ class Image
 
     public function checkFileType($image)
     {
-        $file_ext = $this->getFileExt($image);
-        if ($file_ext != "jpg" && $file_ext != "jpeg" && $file_ext != "png") {
-            return 'Invalid Image type';
-        } else {
-            move_uploaded_file($image['tmp_name'], "images/" . $image['name']);
-            return true;
+        try {
+
+            $file_ext = $this->getFileExt($image);
+            if ($file_ext != "jpg" && $file_ext != "jpeg" && $file_ext != "png") {
+                return 'Invalid Image type';
+            } else {
+                move_uploaded_file($image['tmp_name'], "images/" . $image['name']);
+                return true;
+            }
+
+        } catch (Exception $e) {
+
         }
+
     }
 
     public function resize($image, $entity)
     {
-        list($width, $height) = getimagesize($image);
+        try {
+            list($width, $height) = getimagesize('images/' . $image['name']);
 
-        if ($entity == 'staff') {
-            $new_width = self::STAFF;
-            $new_height = self::STAFF;
-        } else {
-            $new_width = self::PRODUCT;
-            $new_height = self::PRODUCT;
+            $php_image = null;
+
+            if ($this->getFileExt($image) == 'png') {
+                $php_image = imagecreatefrompng('images/' . $image['name']);
+            } else {
+                $php_image = imagecreatefromjpeg('images/' . $image['name']);
+            }
+
+            if ($entity == 'staff') {
+                $new_image = imagecreatetruecolor(self::STAFF, self::STAFF);
+
+                imagecopyresampled($new_image, $php_image, 0, 0, 0, 0, new $width, new $height, self::STAFF, self::STAFF);
+
+            } else {
+                $new_image = imagecreatetruecolor(self::PRODUCT, self::PRODUCT);
+                imagecopyresampled($new_image, $php_image, 0, 0, 0, 0, new $width, new $height, self::PRODUCT, self::PRODUCT);
+            }
+
+
+        } catch (Exception $e) {
+
         }
-
-        $new_image = imagecreatetruecolor($new_width, $new_height);
-
-
-        switch ($this->getFileExt($image)):
-            case 'png':
-                $php_image = imagecreatefrompng($image['tmp_name']);
-                imagecopyresized($new_image, $php_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-            case 'jpg' || 'jpeg':
-                $php_image = imagecreatefromjpeg($image['tmp_name']);
-                imagecopyresized($new_image, $php_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-        endswitch;
-
 
 
     }
 
 
-    public function crop_image($image, $width, $height)
+    public function process_image($image, $width, $height)
     {
-        switch ($this->getFileExt($image)):
-            case 'png':
-                $im = imagecreatefrompng($image['tmp_name']);
-                $size = min(imagesx($im), imagesy($im));
-                $im2 = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $width, 'height' => $height]);
-                if ($im2 !== FALSE) {
-                    imagepng($im2, $image['tmp_name'] . 'cropped.' . $this->getFileExt($image));
-                    imagedestroy($im2);
-                }
-                imagedestroy($im);
+        try {
+            switch ($this->getFileExt($image)):
+                case 'png':
+                    $im = imagecreatefrompng($image['tmp_name']);
+                    $size = min(imagesx($im), imagesy($im));
+                    $im2 = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $width, 'height' => $height]);
+                    if ($im2 !== FALSE) {
+                        imagepng($im2, $image['tmp_name'] . 'cropped.' . $this->getFileExt($image));
+                        imagedestroy($im2);
+                    }
+                    imagedestroy($im);
 
-            case 'jpg' || 'jpeg':
-                $im = imagecreatefromjpeg($image['tmp_name']);
-                $size = min(imagesx($im), imagesy($im));
-                $im2 = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
-                if ($im2 !== FALSE) {
-                    imagejpeg($im2, $image['tmp_name'] . 'cropped.' . $this->getFileExt($image));
-                    imagedestroy($im2);
-                }
-                imagedestroy($im);
+                case 'jpg' || 'jpeg':
+                    $im = imagecreatefromjpeg($image['tmp_name']);
+                    $size = min(imagesx($im), imagesy($im));
+                    $im2 = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
+                    if ($im2 !== FALSE) {
+                        imagejpeg($im2, $image['tmp_name'] . 'cropped.' . $this->getFileExt($image));
+                        imagedestroy($im2);
+                    }
+                    imagedestroy($im);
 
-        endswitch;
+            endswitch;
+
+        } catch (Exception $e) {
+
+        }
+
 
     }
 
     public function square_crop($image)
     {
-        switch ($this->getFileExt($image)):
-            case 'png':
-                $im = imagecreatefrompng($image['tmp_name']);
-                $this->processImage($im, $image);
+        $im = null;
 
-            case 'jpg' || 'jpeg':
-                $im = imagecreatefromjpeg($image['tmp_name']);
-                $this->processImage($im, $image);
+        if ($this->getFileExt($image) == 'png') {
+            $im = imagecreatefrompng($image['tmp_name']);
 
-        endswitch;
+        } else {
+            $im = imagecreatefromjpeg($image['tmp_name']);
 
+        }
+        $this->image_crop($im, $image);
     }
 
-    private function processImage($im, $image)
+    private function image_crop($im, $image)
     {
         $size = min(imagesx($im), imagesy($im));
         $im2 = imagecrop($im, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
