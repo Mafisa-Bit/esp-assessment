@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60b8f46c-022a-47e0-8a1f-f4ae061c4bdc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/esp-assessment.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Image.php" beforeDir="false" afterPath="$PROJECT_DIR$/Image.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/tumelo.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Image.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="373">
+              <caret line="74" column="29" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -131,18 +125,19 @@
       <workItem from="1620876539487" duration="339000" />
       <workItem from="1620877039844" duration="2230000" />
       <workItem from="1620879302520" duration="2151000" />
-      <workItem from="1620881485236" duration="1334000" />
+      <workItem from="1620881485236" duration="1813000" />
+      <workItem from="1620883331522" duration="1299000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10500000" />
+    <option name="totallyTimeSpent" value="12278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.275" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27954546" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -192,18 +187,14 @@
     <entry file="file://$PROJECT_DIR$/images/112165289_327045311666914_2517866882695551696_n.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/110887676_327045285000250_7583616216555745826_n.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/images/110887676_327045285000250_7583616216555745826_n.jpg" />
+    <entry file="file://$PROJECT_DIR$/images/Busisiwe.jpg" />
     <entry file="file://$PROJECT_DIR$/Image.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="373">
+          <caret line="74" column="29" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/Busisiwe.jpg">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

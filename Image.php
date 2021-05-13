@@ -51,20 +51,29 @@ class Image
 
             if ($entity == 'staff') {
                 $new_image = imagecreatetruecolor(self::STAFF, self::STAFF);
-
-                imagecopyresampled($new_image, $php_image, 0, 0, 0, 0, new $width, new $height, self::STAFF, self::STAFF);
+                imagecopyresampled($new_image, $php_image, 0, 0, 0, 0, $width, $height, self::STAFF, self::STAFF);
 
             } else {
                 $new_image = imagecreatetruecolor(self::PRODUCT, self::PRODUCT);
-                imagecopyresampled($new_image, $php_image, 0, 0, 0, 0, new $width, new $height, self::PRODUCT, self::PRODUCT);
-            }
+                imagecopyresampled($new_image, $php_image, 0, 0, 0, 0, $width, $height, self::PRODUCT, self::PRODUCT);
 
+            }
+            $this->output_image($new_image, $this->getFileExt($image));
 
         } catch (Exception $e) {
 
         }
 
 
+    }
+
+    private function output_image($image, $ext)
+    {
+        if ($ext == 'png') {
+            imagepng($image);
+        } else {
+            imagejpeg($image);
+        }
     }
 
 
